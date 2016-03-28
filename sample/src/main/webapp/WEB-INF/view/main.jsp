@@ -6,6 +6,7 @@
     <title>메인</title>
 </head>
 <body>
+1111
     <c:if test="${empty memberInfo}">
     <p>환영합니다.</p>
     <p>

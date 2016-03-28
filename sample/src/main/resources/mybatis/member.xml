@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member.MemberDao">
+
+	<resultMap id="memberResultMap" type="member.Member">
+		<result property="id" column="id" />
+		<result property="email" column="email" />	
+		<result property="password" column="password" />			
+		<result property="name" column="name" />
+		<result property="regDate" column="reg_date" />
+	</resultMap>
+
+	<insert id="memberInsert">
+		insert into member (email, password, name, reg_date) 
+		values (#{email}, #{password}, #{name}, now())
+	</insert>
+	
+	<select id="dupEmailCheck" resultType="int">
+		select count(*) from member 
+		where email = #{email}
+	</select>	
+	
+	<select id="selectByEmail" resultMap="memberResultMap">
+		select id, email, password, name, reg_date 
+		from member 
+		where email = #{email}
+	</select>
+	
+	<update id="changePassword">
+		update member set 
+		password = #{password} 
+		where email = #{email}
+	</update>	
+
+</mapper>
